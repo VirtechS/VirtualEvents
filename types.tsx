@@ -18,6 +18,8 @@ export type RootStackParamList = {
   Modal: { id: string };
   NotFound: undefined;
   Users: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
