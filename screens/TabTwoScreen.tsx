@@ -2,18 +2,19 @@ import { StyleSheet, Image } from "react-native";
 
 import { Text, View } from "../components/Themed";
 import CustomButton from "../components/CustomButton";
-import users from "../assets/data/users.json";
-
-const user = users[0];
+import { useSignOut, useUserData } from "@nhost/react";
 
 export default function TabTwoScreen() {
+  const { signOut } = useSignOut();
+  const user = useUserData();
+
   return (
     <View style={styles.container}>
       <Image source={{ uri: user?.avatarUrl }} style={styles.avatar} />
       <Text style={styles.name}>{user?.displayName}</Text>
-      <View style={{ marginTop: "auto" }}>
+      <View style={{ marginTop: "auto", backgroundColor: 'white' }}>
         <CustomButton
-          onPress={() => { }}
+          onPress={signOut}
           text="Sign out"
           type="TERTIARY"
           fgColor="crimson"
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
+    backgroundColor: 'white'
   },
   avatar: {
     width: 100,
