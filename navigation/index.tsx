@@ -40,7 +40,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
 
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   if (!isAuthenticated) {
     return (
