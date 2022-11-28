@@ -7,7 +7,7 @@ import Navigation from './navigation';
 
 import { NhostClient, NhostReactProvider } from '@nhost/react';
 import * as SecureStore from 'expo-secure-store';
-
+import { NhostApolloProvider } from "@nhost/react-apollo";
 const nhost = new NhostClient({
   subdomain: 'lbintduddvtmicbigcct',
   region: 'eu-central-1',
@@ -25,7 +25,9 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <NhostReactProvider nhost={nhost}>
-          <Navigation colorScheme={colorScheme} />
+          <NhostApolloProvider nhost={nhost}>
+            <Navigation colorScheme={colorScheme} />
+          </NhostApolloProvider>
         </NhostReactProvider>
         <StatusBar />
       </SafeAreaProvider>
