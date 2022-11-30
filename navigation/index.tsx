@@ -91,12 +91,13 @@ function BottomTabNavigator() {
       initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+
       }}>
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+          title: 'События',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -118,6 +119,7 @@ function BottomTabNavigator() {
         name="Chat"
         component={ChatStackNavigator}
         options={{
+          title: 'Чаты',
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <Ionicons name="chatbox-ellipses-outline" size={25} color={color} />
@@ -128,7 +130,7 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Профиль',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

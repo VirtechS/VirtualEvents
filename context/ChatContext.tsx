@@ -2,8 +2,17 @@ import { useUserData } from "@nhost/react";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ActivityIndicator } from 'react-native';
 import { StreamChat, Channel } from "stream-chat";
-import { OverlayProvider, Chat } from "stream-chat-expo";
-export const ChatContext = createContext({});
+import { OverlayProvider, Chat, ruTranslations, Streami18n } from "stream-chat-expo";
+
+type ChatContextType = {
+    currentChannel?: Channel;
+};
+
+export const ChatContext = createContext<ChatContextType>({
+    currentChannel: undefined,
+});
+
+
 
 const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -51,11 +60,11 @@ const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
     if (!chatClient) {
         return <ActivityIndicator />
     }
-
+    const streami18n = new Streami18n({ language: 'ru' });
     const value = { chatClient, currentChannel, setCurrentChannel };
     return (
-        <OverlayProvider>
-            <Chat client={chatClient}>
+        <OverlayProvider i18nInstance={streami18n}>
+            <Chat client={chatClient} i18nInstance={streami18n}>
                 <ChatContext.Provider value={value}>{children}</ChatContext.Provider>
             </Chat>
         </OverlayProvider>
