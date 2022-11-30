@@ -16,7 +16,7 @@ const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
                 return;
             }
 
-            const client = StreamChat.getInstance("mwc7jp6w96df");
+            const client = StreamChat.getInstance("hd9seqjqd4yn");
 
             await client.connectUser(
                 {
@@ -28,6 +28,12 @@ const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
             );
 
             setChatClient(client);
+
+            const globalChannel = client.channel("livestream", "global", {
+                name: "VirtechLive.dev",
+            });
+
+            await globalChannel.watch();
         };
 
         initChat();
