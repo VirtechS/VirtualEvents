@@ -27,7 +27,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -102,7 +102,7 @@ function BottomTabNavigator() {
             <Pressable
               onPress={() => navigation.navigate('Users')}
               style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
+                opacity: pressed ? 1 : 1,
               })}>
               <FontAwesome
                 name="users"
