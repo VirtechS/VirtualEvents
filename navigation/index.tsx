@@ -71,7 +71,6 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="Users" component={UsersScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -99,20 +98,6 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'События',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Users')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 1 : 1,
-              })}>
-              <FontAwesome
-                name="users"
-                size={25}
-                color={'dimgray'}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
         })}
       />
       <BottomTab.Screen
