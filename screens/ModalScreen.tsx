@@ -7,6 +7,7 @@ import CustomButton from '../components/CustomButton';
 import users from "../assets/data/users.json";
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useUserId } from "@nhost/react";
+import { useChatContext } from '../context/ChatContext';
 
 const GetEvent = gql`
   query GetEvent($id: uuid!) {
@@ -52,6 +53,8 @@ export default function ModalScreen({ route }) {
   const event = data?.Event_by_pk;
 
   const [doJoinEvent] = useMutation(JoinEvent);
+
+  const { joinEventChatRoom } = useChatContext();
 
   const onJoin = async () => {
     try {
@@ -115,7 +118,13 @@ export default function ModalScreen({ route }) {
         </View>
 
         {
-          !joined ? <CustomButton text="Join the event" onPress={onJoin} /> : null
+          !joined ? <CustomButton text="Join the event" onPress={onJoin} /> : (
+            <CustomButton
+              text="Join the conversation"
+              type="SECONDARY"
+              onPress={() => joinEventChatRoom(event)}
+            />
+          )
         }
       </View>
 

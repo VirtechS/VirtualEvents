@@ -73,11 +73,32 @@ const ChatContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     };
 
+    const joinEventChatRoom = async (event) => {
+        if (!chatClient) {
+            return;
+        }
+        const channelId = `room-${event.id}`;
+        const eventChannel = chatClient.channel('livestream', channelId, {
+            name: event.name,
+        });
+
+        await eventChannel.watch({ watchers: { limit: 100 } });
+        setCurrentChannel(eventChannel);
+
+        navigation.navigate('Root', {
+            screen: 'Chat',
+        });
+        navigation.navigate('Root', {
+            screen: 'Chat',
+            params: { screen: 'ChatRoom' },
+        });
+    };
+
     if (!chatClient) {
         return <ActivityIndicator />
     }
     const streami18n = new Streami18n({ language: 'ru' });
-    const value = { chatClient, currentChannel, setCurrentChannel, startDMChatRoom };
+    const value = { chatClient, currentChannel, setCurrentChannel, startDMChatRoom, joinEventChatRoom };
     return (
         <OverlayProvider i18nInstance={streami18n}>
             <Chat client={chatClient} i18nInstance={streami18n}>
